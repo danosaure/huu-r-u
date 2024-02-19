@@ -59,6 +59,7 @@
     "@storybook/test": "^7.6.16",
     "eslint-plugin-storybook": "^0.8.0",
     "prop-types": "^15.8.1",
+    "sass": "^1.71.0",
     "storybook": "^7.6.16",
     "webpack": "^5.90.2"
   }

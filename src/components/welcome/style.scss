@@ -1,0 +1,27 @@
+.dano--welcome {
+  display: flex;
+  height: 100vh;
+
+  .dano--welcome--body {
+    flex-grow: 1;
+    text-align: center;
+
+    .dano--welcome--body--logo {
+      max-width: 80%;
+      max-height: 50%;
+      height: 100%;
+      padding-top: 10%;
+      object-fit: contain;
+    }
+  }
+
+  .dano--welcome--footer {
+    .dano--welcome--footer--text {
+      color: inherit;
+    }
+
+    .dano--welcome--footer--logo {
+      color: inherit;
+    }
+  }
+}
