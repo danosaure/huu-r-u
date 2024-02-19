@@ -7,13 +7,25 @@ import { useMemo, useState } from "react";
 
 const Component = () => {
   const [mode] = useState<PaletteMode>('dark');
+  const [showWelcome, setShowWelcome] = useState<boolean>(true);
 
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
+  let content = <Welcome />;
+  if (!showWelcome) {
+    content = (
+      <div>Work on this.</div>
+    );
+  }
+
+  setTimeout(() => {
+    setShowWelcome(false);
+  }, 3000);
+  
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Welcome />
+      {content}
     </ThemeProvider>
   );
 };
