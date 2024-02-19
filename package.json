@@ -48,6 +48,7 @@
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.15.10",
+    "@reduxjs/toolkit": "^2.2.1",
     "@storybook/addon-essentials": "^7.6.16",
     "@storybook/addon-interactions": "^7.6.16",
     "@storybook/addon-links": "^7.6.16",
@@ -59,6 +60,13 @@
     "@storybook/test": "^7.6.16",
     "eslint-plugin-storybook": "^0.8.0",
     "prop-types": "^15.8.1",
+<<<<<<< Updated upstream
+||||||| Stash base
+    "sass": "^1.71.0",
+=======
+    "react-redux": "^9.1.0",
+    "sass": "^1.71.0",
+>>>>>>> Stashed changes
     "storybook": "^7.6.16",
     "webpack": "^5.90.2"
   }
