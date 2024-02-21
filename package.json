@@ -2,6 +2,17 @@
   "name": "huu-r-u",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://danosaure.github.io/huu-r-u/",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -b main -d build"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -16,13 +27,29 @@
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.10",
+    "@storybook/addon-essentials": "^7.6.16",
+    "@storybook/addon-interactions": "^7.6.16",
+    "@storybook/addon-links": "^7.6.16",
+    "@storybook/addon-onboarding": "^1.0.11",
+    "@storybook/blocks": "^7.6.16",
+    "@storybook/preset-create-react-app": "^7.6.16",
+    "@storybook/react": "^7.6.16",
+    "@storybook/react-webpack5": "^7.6.16",
+    "@storybook/test": "^7.6.16",
+    "@types/recoilize": "^0.8.3",
+    "eslint-plugin-storybook": "^0.8.0",
+    "gh-pages": "^6.1.1",
+    "prop-types": "^15.8.1",
+    "recoil": "^0.7.7",
+    "recoilize": "^3.2.0",
+    "sass": "^1.71.0",
+    "storybook": "^7.6.16",
+    "webpack": "^5.90.2"
   },
   "eslintConfig": {
     "extends": [
@@ -42,28 +69,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@emotion/react": "^11.11.3",
-    "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.15.10",
-    "@storybook/addon-essentials": "^7.6.16",
-    "@storybook/addon-interactions": "^7.6.16",
-    "@storybook/addon-links": "^7.6.16",
-    "@storybook/addon-onboarding": "^1.0.11",
-    "@storybook/blocks": "^7.6.16",
-    "@storybook/preset-create-react-app": "^7.6.16",
-    "@storybook/react": "^7.6.16",
-    "@storybook/react-webpack5": "^7.6.16",
-    "@storybook/test": "^7.6.16",
-    "@types/recoilize": "^0.8.3",
-    "eslint-plugin-storybook": "^0.8.0",
-    "prop-types": "^15.8.1",
-    "recoil": "^0.7.7",
-    "recoilize": "^3.2.0",
-    "sass": "^1.71.0",
-    "storybook": "^7.6.16",
-    "webpack": "^5.90.2"
   }
 }
