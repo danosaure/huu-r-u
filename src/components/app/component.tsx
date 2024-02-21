@@ -1,27 +1,26 @@
-import { createTheme, CssBaseline, PaletteMode, ThemeProvider } from "@mui/material";
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import { useRecoilValue } from "recoil";
 
 import { getDesignTokens } from "./get-design-tokens";
 
 import Welcome from "../welcome";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
+import { showWelcomeState } from "../../features/show-welcome";
+import { themeState } from "../../features/theme";
 
 const Component = () => {
-  const [mode] = useState<PaletteMode>('dark');
-  const [showWelcome, setShowWelcome] = useState<boolean>(true);
+  const mode = useRecoilValue(themeState);
+  const showWelcome = useRecoilValue(showWelcomeState);
 
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
-  let content = <Welcome />;
-  if (!showWelcome) {
-    content = (
-      <div>Work on this.</div>
-    );
+  let content;
+  if (showWelcome) {
+    content = <Welcome />;
+  } else {
+    content = <div>Work on this.</div>;
   }
 
-  setTimeout(() => {
-    setShowWelcome(false);
-  }, 3000);
-  
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -30,6 +29,6 @@ const Component = () => {
   );
 };
 
-Component.displayName = "App";
+Component.displayName = "Dano.App";
 
 export default Component;

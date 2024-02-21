@@ -1,16 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.scss';
-import App from './components/app';
-import reportWebVitals from './reportWebVitals';
+import { StrictMode } from "react";
+import ReactDOM from "react-dom/client";
+import { RecoilRoot } from "recoil";
+import RecoilizeDebugger from "recoilize";
+
+import "./index.scss";
+import App from "./components/app";
+import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <StrictMode>
+    <RecoilRoot>
+      <RecoilizeDebugger />
+      <App />
+    </RecoilRoot>
+  </StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
