@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/huu-r-u/static/css/main.ef076b7f.css",
+    "main.js": "/huu-r-u/static/js/main.279951a9.js",
+    "static/js/453.e8cfef9e.chunk.js": "/huu-r-u/static/js/453.e8cfef9e.chunk.js",
+    "static/media/danosaure-logo.png": "/huu-r-u/static/media/danosaure-logo.f472937ba4b0327c1296.png",
+    "index.html": "/huu-r-u/index.html",
+    "main.ef076b7f.css.map": "/huu-r-u/static/css/main.ef076b7f.css.map",
+    "main.279951a9.js.map": "/huu-r-u/static/js/main.279951a9.js.map",
+    "453.e8cfef9e.chunk.js.map": "/huu-r-u/static/js/453.e8cfef9e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ef076b7f.css",
+    "static/js/main.279951a9.js"
+  ]
+}
