@@ -1,12 +1,11 @@
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import { useMemo } from "react";
 import { useRecoilValue } from "recoil";
 
 import { getDesignTokens } from "./get-design-tokens";
 
 import Welcome from "../welcome";
-import { useMemo } from "react";
-import { showWelcomeState } from "../../features/show-welcome";
-import { themeState } from "../../features/theme";
+import { showWelcomeState, themeState } from "../../states";
 
 const Component = () => {
   const mode = useRecoilValue(themeState);
