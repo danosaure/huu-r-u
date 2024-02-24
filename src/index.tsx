@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { RecoilRoot } from "recoil";
 import RecoilizeDebugger from "recoilize";
 
+import "./api-server";
 import "./index.scss";
 import App from "./components/app";
 import reportWebVitals from "./reportWebVitals";

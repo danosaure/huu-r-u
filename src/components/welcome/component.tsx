@@ -14,6 +14,7 @@ import logo from "./HuuRu-logo.png";
 import danosaure from "./danosaure-logo.png";
 import "./style.scss";
 import { doNotShowWelcomeState, showWelcomeState } from "../../states";
+import { updateUserPreference } from "../../api-gateway";
 
 const Component = () => {
   const [doNotShowWelcomeChecked, setDoNotShowWelcome] = useRecoilState(
@@ -23,10 +24,9 @@ const Component = () => {
 
   const toggle = () => setDoNotShowWelcome(!doNotShowWelcomeChecked);
 
-  const closeWelcomePage = () => {
+  const closeWelcomePage = async () => {
     if (doNotShowWelcomeChecked) {
-      // TODO: Adding persistence
-      console.warn("Need to save this to DB");
+      await updateUserPreference('showWelcome', !doNotShowWelcomeChecked);
     }
     setShowWelcome(false);
   };
