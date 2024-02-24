@@ -1,15 +1,26 @@
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import { useMemo } from "react";
-import { useRecoilValue } from "recoil";
+import { useEffect, useMemo } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import { getDesignTokens } from "./get-design-tokens";
 
 import Welcome from "../welcome";
 import { showWelcomeState, themeState } from "../../states";
+import { getUserPreference } from "../../api-gateway";
 
 const Component = () => {
   const mode = useRecoilValue(themeState);
-  const showWelcome = useRecoilValue(showWelcomeState);
+  const [showWelcome, setShowWelcome] = useRecoilState(showWelcomeState);
+
+  useEffect(() => {
+    (async () => {
+      const persistentShowWelcome = await getUserPreference('showWelcome');
+      console.log(`persistentShowWelcome: (${typeof persistentShowWelcome})=`, persistentShowWelcome);
+      if (persistentShowWelcome !== undefined && persistentShowWelcome !== showWelcome) {
+        setShowWelcome(persistentShowWelcome);
+      }
+    })();
+  }, []);
 
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
