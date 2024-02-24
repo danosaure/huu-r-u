@@ -5,27 +5,39 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { getDesignTokens } from "./get-design-tokens";
 
 import Welcome from "../welcome";
-import { showWelcomeState, themeState } from "../../states";
+import {
+  showWelcomeState,
+  themeState,
+  userPreferencesLoadingState,
+} from "../../states";
 import { getUserPreference } from "../../api-gateway";
 
 const Component = () => {
   const mode = useRecoilValue(themeState);
   const [showWelcome, setShowWelcome] = useRecoilState(showWelcomeState);
+  const [userPreferencesLoading, setUserPreferencesLoading] = useRecoilState(
+    userPreferencesLoadingState
+  );
 
   useEffect(() => {
     (async () => {
-      const persistentShowWelcome = await getUserPreference('showWelcome');
-      console.log(`persistentShowWelcome: (${typeof persistentShowWelcome})=`, persistentShowWelcome);
-      if (persistentShowWelcome !== undefined && persistentShowWelcome !== showWelcome) {
+      const persistentShowWelcome = await getUserPreference("showWelcome");
+      if (
+        persistentShowWelcome !== undefined &&
+        persistentShowWelcome !== showWelcome
+      ) {
         setShowWelcome(persistentShowWelcome);
       }
+      setUserPreferencesLoading(false);
     })();
-  }, []);
+  }, [showWelcome, setShowWelcome, setUserPreferencesLoading]);
 
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
   let content;
-  if (showWelcome) {
+  if (userPreferencesLoading) {
+    content = null;
+  } else if (showWelcome) {
     content = <Welcome />;
   } else {
     content = <div>Work on this.</div>;
