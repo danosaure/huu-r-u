@@ -1,2 +1,5 @@
-export type { UserPreferenceType } from "./user-preference";
+export type {
+  PersistentUserPreferencesType,
+  UserPreferencesType,
+} from "./user-preference";
 export { UserPreference } from "./user-preference";

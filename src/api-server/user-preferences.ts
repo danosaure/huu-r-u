@@ -1,15 +1,18 @@
 import { UserPreference } from "../models";
-import type { UserPreferenceType } from "../models";
+import type {
+  PersistentUserPreferencesType,
+  UserPreferencesType,
+} from "../models";
 import persistence from "./persistence";
 import { register } from "./registry";
 
-const update = async <
-  T extends keyof UserPreferenceType,
-  K extends UserPreferenceType[T]
+const patch = async <
+  T extends keyof UserPreferencesType,
+  K extends UserPreferencesType[T]
 >(
   preference: T,
   value: K
-): Promise<void> => {
+): Promise<T> => {
   const idb = await persistence();
 
   const transaction = idb.transaction(UserPreference.STORE_NAME, "readwrite");
@@ -19,15 +22,49 @@ const update = async <
 
   const objectStore = transaction.objectStore(UserPreference.STORE_NAME);
 
-  const newUserPreference = {
-    preference,
-    value,
+  const persistentUserPreferences =
+    await new Promise<PersistentUserPreferencesType>((resolve) => {
+      const request = objectStore.get("me");
+      request.onsuccess = () => resolve(request.result);
+    });
+
+  const newUserPreferences = {
+    ...(persistentUserPreferences || { id: "me" }),
+    [preference]: value,
   };
 
-  await new Promise<void>((resolve) => {
-    const request = objectStore.put(newUserPreference);
-    request.onsuccess = () => resolve();
+  return new Promise<any>((resolve) => {
+    const request = objectStore.put(newUserPreferences);
+    request.onsuccess = () => resolve(request.result);
   });
 };
 
-register("userPreferences", "/user-preferences", update);
+const get = async <
+  T extends keyof UserPreferencesType,
+  K extends PersistentUserPreferencesType[T]
+>(
+  preference: T
+): Promise<K> => {
+  const idb = await persistence();
+
+  const transaction = idb.transaction(UserPreference.STORE_NAME, "readonly");
+  transaction.oncomplete = () => {
+    idb.close();
+  };
+
+  const objectStore = transaction.objectStore(UserPreference.STORE_NAME);
+
+  const persistentItem = await new Promise<PersistentUserPreferencesType>(
+    (resolve) => {
+      const request = objectStore.get("me");
+      request.onsuccess = () => resolve(request.result);
+    }
+  );
+
+  return (persistentItem || {})[preference] as K;
+};
+
+register("userPreferences", "/user-preferences", {
+  GET: get,
+  PATCH: patch,
+});
