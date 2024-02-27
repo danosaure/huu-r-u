@@ -1,5 +1,9 @@
 import { ControllerType, controllerByUrlMethod } from "../api-server/registry";
-import { UserPreferencesOptionType, UserPreferencesValueType } from "../models";
+import {
+  PersistentUserPreferencesType,
+  UserPreferencesOptionType,
+  UserPreferencesValueType,
+} from "../models";
 
 export const patchUserPreference = async <
   T extends UserPreferencesOptionType,
@@ -8,7 +12,9 @@ export const patchUserPreference = async <
   url: string,
   preference: T,
   value: K
-): Promise<void> => {
-  const update: ControllerType = controllerByUrlMethod(url, "PATCH");
-  update(preference, value);
+): Promise<PersistentUserPreferencesType> => {
+  const update: ControllerType<PersistentUserPreferencesType> =
+    controllerByUrlMethod(url, "PATCH");
+  const res = update(preference, value);
+  return res;
 };

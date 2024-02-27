@@ -8,26 +8,31 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 
 import logo from "./HuuRu-logo.png";
 import danosaure from "./danosaure-logo.png";
 import "./style.scss";
-import { doNotShowWelcomeState, useSetShowWelcomeValue } from "../../states";
-// import { patchUserPreference } from "../../api-gateway";
+import {
+  doNotShowWelcomeState,
+  useSetShowWelcomeValue,
+  useUserPreferencesPatch,
+} from "../../states";
 
 const Component = () => {
   const [doNotShowWelcomeChecked, setDoNotShowWelcome] = useRecoilState(
     doNotShowWelcomeState
   );
+  const patchUserPreference = useUserPreferencesPatch();
+
   const setShowWelcome = useSetShowWelcomeValue();
 
   const toggle = () => setDoNotShowWelcome(!doNotShowWelcomeChecked);
 
   const closeWelcomePage = async () => {
-    // if (doNotShowWelcomeChecked) {
-    //   await patchUserPreference('showWelcome', !doNotShowWelcomeChecked);
-    // }
+    if (doNotShowWelcomeChecked) {
+      await patchUserPreference("showWelcome", !doNotShowWelcomeChecked);
+    }
     setShowWelcome(false);
   };
 

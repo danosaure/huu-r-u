@@ -7,13 +7,13 @@ import type {
 import persistence from "../persistence";
 import { ControllerType, register } from "../registry";
 
-const patch = async <
+const patch: ControllerType<PersistentUserPreferencesType> = async <
   T extends UserPreferencesOptionType,
   K extends UserPreferencesValueType<T>
 >(
   preference: T,
   value: K
-): Promise<T> => {
+): Promise<PersistentUserPreferencesType> => {
   const idb = await persistence();
 
   const transaction = idb.transaction(UserPreferences.STORE_NAME, "readwrite");
@@ -34,17 +34,21 @@ const patch = async <
     [preference]: value,
   };
 
-  return new Promise<any>((resolve) => {
+  await new Promise<void>((resolve) => {
     const request = objectStore.put(newUserPreferences);
-    request.onsuccess = () => resolve(request.result);
+    request.onsuccess = () => resolve();
   });
+
+  return newUserPreferences;
 };
 
 export type GetUserPreferencesParamsType = {
   id: string;
-}
+};
 
-const get: ControllerType = async <PersistentUserPreferencesType>({
+const get: ControllerType<PersistentUserPreferencesType> = async <
+  PersistentUserPreferencesType
+>({
   id,
 }: GetUserPreferencesParamsType): Promise<PersistentUserPreferencesType> => {
   const idb = await persistence();
@@ -60,7 +64,6 @@ const get: ControllerType = async <PersistentUserPreferencesType>({
       const request = objectStore.get(id);
       request.onsuccess = () => resolve(request.result);
     }
-
   );
   return {
     ...UserPreferences.DEFAULT,

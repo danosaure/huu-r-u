@@ -1,6 +1,6 @@
 import UrlPattern from "url-pattern";
 
-export type ControllerType = <T>(...args: any[]) => Promise<T>;
+export type ControllerType<T> = (...args: any[]) => Promise<T>;
 
 export type ControllerMethodType = "GET" | "PATCH" | "UPDATE";
 
