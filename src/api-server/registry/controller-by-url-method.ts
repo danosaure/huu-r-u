@@ -2,10 +2,10 @@ import { controllersByUrl } from "./controllers-by-url";
 import { RegistryError } from "./error";
 import { ControllerMethodType, ControllerType } from "./types";
 
-export const controllerByUrlMethod = (
+export const controllerByUrlMethod = <T>(
   url: string,
   method: ControllerMethodType
-): ControllerType => {
+): ControllerType<T> => {
   const controllers = controllersByUrl(url);
 
   const methodController = controllers[method];
