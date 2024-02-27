@@ -1,9 +1,9 @@
-import { StrictMode } from "react";
+import { StrictMode, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { RecoilRoot } from "recoil";
 import RecoilizeDebugger from "recoilize";
 
-import "./api-server";
+import "./api-server/routes";
 import "./index.scss";
 import App from "./components/app";
 import reportWebVitals from "./reportWebVitals";
@@ -15,7 +15,9 @@ root.render(
   <StrictMode>
     <RecoilRoot>
       <RecoilizeDebugger />
-      <App />
+      <Suspense fallback={null}>
+        <App />
+      </Suspense>
     </RecoilRoot>
   </StrictMode>
 );
