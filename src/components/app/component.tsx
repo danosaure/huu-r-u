@@ -4,10 +4,11 @@ import { useMemo } from "react";
 import { getDesignTokens } from "./get-design-tokens";
 
 import Welcome from "../welcome";
-import { useUserPreferences } from "../../states";
+import { useShowWelcomeValue, useUserPreferences } from "../../states";
 
 const Component = () => {
   const userPreferences = useUserPreferences();
+  const showWelcome = useShowWelcomeValue();
 
   const theme = useMemo(
     () => createTheme(getDesignTokens(userPreferences?.theme || "dark")),
@@ -15,10 +16,7 @@ const Component = () => {
   );
 
   let content;
-  if (
-    userPreferences?.showWelcome === undefined ||
-    userPreferences.showWelcome
-  ) {
+  if (showWelcome) {
     content = <Welcome />;
   } else {
     content = <div>Work on this.</div>;

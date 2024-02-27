@@ -13,14 +13,14 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import logo from "./HuuRu-logo.png";
 import danosaure from "./danosaure-logo.png";
 import "./style.scss";
-import { doNotShowWelcomeState, showWelcomeState } from "../../states";
+import { doNotShowWelcomeState, useSetShowWelcomeValue } from "../../states";
 // import { patchUserPreference } from "../../api-gateway";
 
 const Component = () => {
   const [doNotShowWelcomeChecked, setDoNotShowWelcome] = useRecoilState(
     doNotShowWelcomeState
   );
-  const setShowWelcome = useSetRecoilState(showWelcomeState);
+  const setShowWelcome = useSetShowWelcomeValue();
 
   const toggle = () => setDoNotShowWelcome(!doNotShowWelcomeChecked);
 

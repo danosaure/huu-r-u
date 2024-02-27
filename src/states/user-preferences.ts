@@ -1,4 +1,4 @@
-import { atom, selector, useRecoilValue } from "recoil";
+import { atom, selector, useRecoilValue, useSetRecoilState } from "recoil";
 import { UserPreferencesApiType } from "../api-types";
 import { getUserPreferences } from "../api-gateway";
 import { rootApiState } from "./root-api";
@@ -17,3 +17,23 @@ const userPreferencesState = atom<UserPreferencesApiType>({
 });
 
 export const useUserPreferences = () => useRecoilValue(userPreferencesState);
+
+const showWelcomeSelector = selector<boolean>({
+  key: "userPreferences__showWelcome",
+  get: ({ get }) => {
+    const userPreferences = get(userPreferencesState);
+    if (userPreferences?.showWelcome !== undefined) {
+      return userPreferences.showWelcome;
+    }
+  },
+  set: ({ get, set }, showWelcome) => {
+    const userPreferences = get(userPreferencesState);
+    set(userPreferencesState, {
+      ...userPreferences,
+      showWelcome,
+    });
+  },
+});
+
+export const useShowWelcomeValue = () => useRecoilValue(showWelcomeSelector);
+export const useSetShowWelcomeValue = () => useSetRecoilState(showWelcomeSelector);
