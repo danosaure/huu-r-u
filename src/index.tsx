@@ -1,16 +1,14 @@
-import { StrictMode, Suspense } from "react";
-import ReactDOM from "react-dom/client";
-import { RecoilRoot } from "recoil";
-import RecoilizeDebugger from "recoilize";
+import { StrictMode, Suspense } from 'react';
+import ReactDOM from 'react-dom/client';
+import { RecoilRoot } from 'recoil';
+import RecoilizeDebugger from 'recoilize';
 
-import "./api-server/routes";
-import "./index.scss";
-import App from "./components/app";
-import reportWebVitals from "./reportWebVitals";
+import './api-server/routes';
+import './index.scss';
+import App from './components/app';
+import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <StrictMode>
     <RecoilRoot>

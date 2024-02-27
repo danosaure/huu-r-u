@@ -1,1 +1,1 @@
-export type { PersistentUserPreferencesType as UserPreferencesApiType } from '../models/user-preference'
+export type { PersistentUserPreferencesType as UserPreferencesApiType } from '../models/user-preference';
