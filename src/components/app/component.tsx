@@ -1,43 +1,24 @@
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import { useEffect, useMemo } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useMemo } from "react";
 
 import { getDesignTokens } from "./get-design-tokens";
 
 import Welcome from "../welcome";
-import {
-  showWelcomeState,
-  themeState,
-  userPreferencesLoadingState,
-} from "../../states";
-import { getUserPreference } from "../../api-gateway";
+import { useUserPreferences } from "../../states";
 
 const Component = () => {
-  const mode = useRecoilValue(themeState);
-  const [showWelcome, setShowWelcome] = useRecoilState(showWelcomeState);
-  const [userPreferencesLoading, setUserPreferencesLoading] = useRecoilState(
-    userPreferencesLoadingState
+  const userPreferences = useUserPreferences();
+
+  const theme = useMemo(
+    () => createTheme(getDesignTokens(userPreferences?.theme || "dark")),
+    [userPreferences?.theme]
   );
 
-  useEffect(() => {
-    (async () => {
-      const persistentShowWelcome = await getUserPreference("showWelcome");
-      if (
-        persistentShowWelcome !== undefined &&
-        persistentShowWelcome !== showWelcome
-      ) {
-        setShowWelcome(persistentShowWelcome);
-      }
-      setUserPreferencesLoading(false);
-    })();
-  }, [showWelcome, setShowWelcome, setUserPreferencesLoading]);
-
-  const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
-
   let content;
-  if (userPreferencesLoading) {
-    content = null;
-  } else if (showWelcome) {
+  if (
+    userPreferences?.showWelcome === undefined ||
+    userPreferences.showWelcome
+  ) {
     content = <Welcome />;
   } else {
     content = <div>Work on this.</div>;

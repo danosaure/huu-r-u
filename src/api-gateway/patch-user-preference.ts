@@ -1,13 +1,14 @@
-import { ControllerType, controllerByName } from "../api-server/registry";
-import { UserPreferencesType } from "../models";
+import { ControllerType, controllerByUrlMethod } from "../api-server/registry";
+import { UserPreferencesOptionType, UserPreferencesValueType } from "../models";
 
 export const patchUserPreference = async <
-  T extends keyof UserPreferencesType,
-  K extends UserPreferencesType[T]
+  T extends UserPreferencesOptionType,
+  K extends UserPreferencesValueType<T>
 >(
+  url: string,
   preference: T,
   value: K
 ): Promise<void> => {
-  const update: ControllerType = controllerByName("userPreferences", "PATCH");
+  const update: ControllerType = controllerByUrlMethod(url, "PATCH");
   update(preference, value);
 };
