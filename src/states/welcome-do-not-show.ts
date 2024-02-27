@@ -1,6 +1,6 @@
-import { atom } from "recoil";
+import { atom } from 'recoil';
 
 export const doNotShowWelcomeState = atom<boolean>({
-  key: "doNotShowWelcome",
+  key: 'doNotShowWelcome',
   default: false,
 });

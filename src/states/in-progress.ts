@@ -1,4 +1,4 @@
-import { atomFamily } from "recoil";
+import { atomFamily } from 'recoil';
 
 const PROGRESS_DEFAULTS: Record<string, boolean> = {
   userPreferences: true,
@@ -9,6 +9,6 @@ const defaultById = (id: string): boolean => {
 };
 
 export const inProgressState = atomFamily<boolean, string>({
-  key: "inProgress",
+  key: 'inProgress',
   default: (id) => defaultById(id),
 });

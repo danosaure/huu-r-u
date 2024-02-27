@@ -1,3 +1,3 @@
-export { open } from "./indexedDB";
+export { open } from './indexedDB';
 
-export type { MigrationType, OnChangeVersionType } from "./indexedDB";
+export type { MigrationType, OnChangeVersionType } from './indexedDB';

@@ -1,19 +1,16 @@
-import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import { useMemo } from "react";
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
+import { useMemo } from 'react';
 
-import { getDesignTokens } from "./get-design-tokens";
+import { getDesignTokens } from './get-design-tokens';
 
-import Welcome from "../welcome";
-import { useShowWelcomeValue, useUserPreferences } from "../../states";
+import Welcome from '../welcome';
+import { useShowWelcomeValue, useUserPreferences } from '../../states';
 
 const Component = () => {
   const userPreferences = useUserPreferences();
   const showWelcome = useShowWelcomeValue();
 
-  const theme = useMemo(
-    () => createTheme(getDesignTokens(userPreferences?.theme || "dark")),
-    [userPreferences?.theme]
-  );
+  const theme = useMemo(() => createTheme(getDesignTokens(userPreferences?.theme || 'dark')), [userPreferences?.theme]);
 
   let content;
   if (showWelcome) {
@@ -30,6 +27,6 @@ const Component = () => {
   );
 };
 
-Component.displayName = "Dano.App";
+Component.displayName = 'Dano.App';
 
 export default Component;

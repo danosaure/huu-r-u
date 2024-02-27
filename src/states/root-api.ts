@@ -1,9 +1,9 @@
-import { atom, useRecoilValue } from "recoil";
-import { RootApiType } from "../api-types";
-import { getRootApi } from "../api-gateway";
+import { atom, useRecoilValue } from 'recoil';
+import { RootApiType } from '../api-types';
+import { getRootApi } from '../api-gateway';
 
 export const rootApiState = atom<RootApiType>({
-  key: "rooApi",
+  key: 'rooApi',
   default: getRootApi(),
 });
 

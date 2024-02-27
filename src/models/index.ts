@@ -4,5 +4,5 @@ export type {
   UserPreferencesOptionType,
   UserPreferencesValueType,
   UserPreferencesOptionsType,
-} from "./user-preferences";
-export { UserPreferences } from "./user-preferences";
+} from './user-preferences';
+export { UserPreferences } from './user-preferences';
